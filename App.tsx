@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { FC } from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { StatusBar, Text } from 'react-native';
+import Navigator from 'navigator';
+import { theme } from 'theme';
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
+import { Montserrat } from 'constants/fonts';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from 'redux/store';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App: FC = () => {
+    const [fontsLoaded] = useFonts({
+        [Montserrat.Light]: require('./assets/fonts/Montserrat-Light.ttf'),
+        [Montserrat.Regular]: require('./assets/fonts/Montserrat-Regular.ttf'),
+        [Montserrat.Medium]: require('./assets/fonts/Montserrat-Medium.ttf'),
+        [Montserrat.SemiBold]: require('./assets/fonts/Montserrat-SemiBold.ttf'),
+        [Montserrat.Bold]: require('./assets/fonts/Montserrat-Bold.ttf'),
+        [Montserrat.ExtraBold]: require('./assets/fonts/Montserrat-ExtraBold.ttf'),
+        [Montserrat.Black]: require('./assets/fonts/Montserrat-Black.ttf'),
+    });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    }
+
+    return (
+        <Provider store={store}>
+            <PersistGate loading={<Text>Store loading</Text>} persistor={persistor}>
+                <PaperProvider theme={theme}>
+                    <StatusBar />
+                    <Navigator />
+                </PaperProvider>
+            </PersistGate>
+        </Provider>
+    );
+};
+
+export default App;
