@@ -6,11 +6,11 @@ interface IProps extends TextProps {
     children: ReactNode;
 }
 
-const Title: FC<IProps> = ({ children, ...props }) => {
+const Title: FC<IProps> = ({ children, style, ...props }) => {
     const { colors } = useTheme();
 
     return (
-        <PaperTitle {...props} style={makeStyles(colors)}>
+        <PaperTitle style={[makeStyles(colors), style]} {...props}>
             {children}
         </PaperTitle>
     );

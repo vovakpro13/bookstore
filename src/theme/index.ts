@@ -10,6 +10,7 @@ declare global {
             dark: string;
             button: string;
             transparent: string;
+            error: string;
         }
     }
 }
@@ -51,6 +52,7 @@ export const theme: ReactNativePaper.Theme = {
         button: '#D2D2D2',
         transparent: '#F4F4F4',
         white: '#FFFFFF',
+        error: '#ec5c49',
     },
 
     fonts: configureFonts(fontConfig),
