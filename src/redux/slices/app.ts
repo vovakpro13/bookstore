@@ -3,7 +3,11 @@ import { RootState } from 'redux/store';
 import { Languages } from 'constants/languages';
 import { getDeviceLanguage } from 'modules/common/helpers/getDeviceLanguage';
 
-const initialState = {
+interface InitialStateType {
+    language: Languages;
+}
+
+const initialState: InitialStateType = {
     language: getDeviceLanguage(),
 };
 

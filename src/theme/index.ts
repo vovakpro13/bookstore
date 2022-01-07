@@ -1,5 +1,6 @@
 import { configureFonts, DefaultTheme } from 'react-native-paper';
 import { Montserrat } from 'constants/fonts';
+import { Font, Fonts } from 'react-native-paper/src/types';
 
 declare global {
     namespace ReactNativePaper {
@@ -12,26 +13,49 @@ declare global {
             transparent: string;
             error: string;
         }
+
+        interface ThemeFonts {
+            black: ThemeFont;
+            extraBold: ThemeFont;
+            bold: ThemeFont;
+            semiBold: ThemeFont;
+        }
     }
 }
 
-const fontConfig: any = {
+const fontConfig: Record<string, ReactNativePaper.ThemeFonts> = {
     web: {
-        regular: {
-            fontFamily: Montserrat.Regular,
-            fontWeight: 'normal',
+        black: {
+            fontFamily: Montserrat.Black,
+            fontWeight: '800',
+        },
+        extraBold: {
+            fontFamily: Montserrat.ExtraBold,
+            fontWeight: '800',
+        },
+        bold: {
+            fontFamily: Montserrat.Bold,
+            fontWeight: '700',
+        },
+        semiBold: {
+            fontFamily: Montserrat.SemiBold,
+            fontWeight: '600',
         },
         medium: {
             fontFamily: Montserrat.Medium,
-            fontWeight: 'normal',
+            fontWeight: '500',
+        },
+        regular: {
+            fontFamily: Montserrat.Regular,
+            fontWeight: '400',
         },
         light: {
             fontFamily: Montserrat.Light,
-            fontWeight: 'normal',
+            fontWeight: '300',
         },
         thin: {
             fontFamily: Montserrat.Light,
-            fontWeight: 'normal',
+            fontWeight: '300',
         },
     },
 };
@@ -55,5 +79,5 @@ export const theme: ReactNativePaper.Theme = {
         error: '#ec5c49',
     },
 
-    fonts: configureFonts(fontConfig),
+    fonts: configureFonts(fontConfig) as ReactNativePaper.ThemeFonts,
 };

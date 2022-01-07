@@ -19,6 +19,10 @@ export const RegistrationText: EditorialType = {
         [Languages.UA]: 'Забули пароль?',
         [Languages.EN]: 'Forgot password?',
     },
+    Registration: {
+        [Languages.UA]: 'Зареєструватись',
+        [Languages.EN]: 'Registration',
+    },
 };
 
 export const getRegistrationEditorial = createEditorialGenerator(RegistrationText);

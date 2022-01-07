@@ -1,35 +1,37 @@
 import React, { FC, ReactNode } from 'react';
-import { Button, useTheme } from 'react-native-paper';
-import { StyleSheet, Text } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-type IProps = React.ComponentProps<typeof Button> & {
+type IProps = React.ComponentProps<typeof TouchableOpacity> & {
     children: ReactNode;
 };
 
 const PrimaryButton: FC<IProps> = ({ children, ...props }) => {
-    const { colors } = useTheme();
-    const { container, text } = makeStyles(colors);
+    const { container, text } = makeStyles(useTheme());
 
     return (
-        <Button style={container} mode="contained" uppercase={false} {...props}>
+        <TouchableOpacity style={container} {...props}>
             <Text style={text}>{children}</Text>
-        </Button>
+        </TouchableOpacity>
     );
 };
 
-const makeStyles = (colors: ReactNativePaper.ThemeColors) =>
+const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme) =>
     StyleSheet.create({
         container: {
             borderRadius: 50,
             backgroundColor: colors.primary,
             minHeight: 40,
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'row',
+            alignItems: 'center',
         },
         text: {
-            fontSize: 19,
+            fontSize: 15,
             color: colors.white,
-            fontWeight: '400',
-            paddingVertical: 10,
-            height: '100%',
+            fontFamily: fonts.regular.fontFamily,
         },
     });
+
 export default PrimaryButton;

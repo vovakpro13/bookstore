@@ -18,7 +18,7 @@ type IProps = TextInputProps & {
 };
 
 const TextInput: FC<IProps> = ({ icon, helperText, isError, ...textInputProps }) => {
-    const { colors } = useTheme();
+    const theme = useTheme();
     const {
         wrapper,
         container,
@@ -28,7 +28,7 @@ const TextInput: FC<IProps> = ({ icon, helperText, isError, ...textInputProps })
         helperWrapper,
         errorHelpText,
         helpText,
-    } = makeStyles(colors);
+    } = makeStyles(theme);
 
     return (
         <View style={wrapper}>
@@ -46,7 +46,7 @@ const TextInput: FC<IProps> = ({ icon, helperText, isError, ...textInputProps })
     );
 };
 
-const makeStyles = (colors: ReactNativePaper.ThemeColors) =>
+const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme) =>
     StyleSheet.create({
         wrapper: {
             display: 'flex',
@@ -63,7 +63,7 @@ const makeStyles = (colors: ReactNativePaper.ThemeColors) =>
             borderColor: '#DCDCDC',
             borderWidth: 1,
             borderRadius: 50,
-            minHeight: 35,
+            minHeight: 45,
             padding: 9,
         },
 
@@ -79,11 +79,9 @@ const makeStyles = (colors: ReactNativePaper.ThemeColors) =>
 
         input: {
             width: '100%',
-            paddingLeft: 0,
             color: '#424242',
             fontSize: 18,
-            lineHeight: 19,
-            fontWeight: '400',
+            fontFamily: fonts.regular.fontFamily,
         },
 
         helperWrapper: {

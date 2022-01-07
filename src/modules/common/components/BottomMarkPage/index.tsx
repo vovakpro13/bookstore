@@ -1,20 +1,19 @@
-import React, { FC, ReactNode } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { CSSProperties, FC, ReactNode } from 'react';
+import { StyleProp, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import BookStoreSplashLogo from 'assets/svg/BookStoreSplashLogo';
 
 interface IProps {
     children: ReactNode;
+    style?: StyleProp<any>;
 }
 
-const BottomMarkPage: FC<IProps> = ({ children: Children }) => {
+const BottomMarkPage: FC<IProps> = ({ children: Children, style }) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <View style={styles.content}>{Children}</View>
 
-            <View>
-                <BookStoreSplashLogo />
-            </View>
+            <BookStoreSplashLogo />
         </View>
     );
 };
@@ -30,6 +29,7 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         width: '100%',
+        minHeight: 540,
     },
 });
 
