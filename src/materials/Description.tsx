@@ -7,7 +7,7 @@ interface IProps extends TextStyle {
     TextProps?: TextProps;
 }
 
-const Title: FC<IProps> = ({ children, TextProps, ...styles }) => {
+const Description: FC<IProps> = ({ children, TextProps, ...styles }) => {
     const theme = useTheme();
 
     return (
@@ -18,9 +18,10 @@ const Title: FC<IProps> = ({ children, TextProps, ...styles }) => {
 };
 
 const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme): StyleProp<TextStyle> => ({
-    color: colors.primaryText,
-    fontFamily: fonts.medium.fontFamily,
-    fontSize: 28,
+    color: colors.dark,
+    fontFamily: fonts.regular.fontFamily,
+    fontSize: 15,
+    lineHeight: 21,
 });
 
-export default Title;
+export default Description;

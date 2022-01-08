@@ -12,7 +12,7 @@ const AuthDrawer: FC<IProps> = ({ children }) => {
     const { container, background } = makeStyles(theme);
 
     return (
-        <BottomMarkPage style={{ backgroundColor: theme.colors.white }}>
+        <BottomMarkPage style={{ backgroundColor: theme.colors.white, position: 'relative' }}>
             <Image
                 style={background}
                 resizeMode="stretch"
@@ -27,18 +27,18 @@ const AuthDrawer: FC<IProps> = ({ children }) => {
 
 const win = Dimensions.get('window');
 
-const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme) =>
+const makeStyles = ({ colors }: ReactNativePaper.Theme) =>
     StyleSheet.create({
         container: {
             padding: 32,
-            paddingTop: 42,
+            paddingTop: 32,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-start',
             flex: 1,
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
-            marginTop: -35,
+            marginTop: '42%',
             backgroundColor: colors.white,
         },
 
@@ -46,6 +46,7 @@ const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme) =>
             width: win.width,
             flex: 1,
             maxHeight: win.height - 520,
+            position: 'absolute',
         },
     });
 

@@ -2,18 +2,10 @@ import { Languages } from 'constants/languages';
 import { createEditorialGenerator } from 'modules/common/helpers/createEditorialGenerator';
 import { EditorialType } from 'constants/editorial/types';
 
-export const RegistrationText: EditorialType = {
+export const SignInText: EditorialType = {
     SignIn: {
         [Languages.UA]: 'Увійти',
         [Languages.EN]: 'Sign In',
-    },
-    Username: {
-        [Languages.UA]: 'Логін',
-        [Languages.EN]: 'Username',
-    },
-    Password: {
-        [Languages.UA]: 'Пароль',
-        [Languages.EN]: 'Password',
     },
     ForgotPassword: {
         [Languages.UA]: 'Забули пароль?',
@@ -25,4 +17,4 @@ export const RegistrationText: EditorialType = {
     },
 };
 
-export const getRegistrationEditorial = createEditorialGenerator(RegistrationText);
+export const getSignInTextEditorial = createEditorialGenerator(SignInText);

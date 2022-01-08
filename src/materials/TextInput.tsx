@@ -74,7 +74,6 @@ const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme) =>
         image: {
             width: 27,
             height: 27,
-            marginRight: 10,
         },
 
         input: {
@@ -82,6 +81,7 @@ const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme) =>
             color: '#424242',
             fontSize: 18,
             fontFamily: fonts.regular.fontFamily,
+            marginLeft: 10,
         },
 
         helperWrapper: {

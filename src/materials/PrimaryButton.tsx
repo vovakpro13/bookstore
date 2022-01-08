@@ -4,10 +4,11 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 type IProps = React.ComponentProps<typeof TouchableOpacity> & {
     children: ReactNode;
+    secondary?: boolean;
 };
 
-const PrimaryButton: FC<IProps> = ({ children, ...props }) => {
-    const { container, text } = makeStyles(useTheme());
+const PrimaryButton: FC<IProps> = ({ children, secondary, ...props }) => {
+    const { container, text } = makeStyles(useTheme(), secondary);
 
     return (
         <TouchableOpacity style={container} {...props}>
@@ -16,11 +17,11 @@ const PrimaryButton: FC<IProps> = ({ children, ...props }) => {
     );
 };
 
-const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme) =>
+const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme, secondary?: boolean) =>
     StyleSheet.create({
         container: {
             borderRadius: 50,
-            backgroundColor: colors.primary,
+            backgroundColor: secondary ? colors.button : colors.primary,
             minHeight: 40,
             display: 'flex',
             justifyContent: 'center',

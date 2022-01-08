@@ -74,7 +74,10 @@ module.exports = {
                 'import/no-named-as-default-member': 'error',
                 'import/no-webpack-loader-syntax': 'off',
                 'react-hooks/exhaustive-deps': 'off',
-                'import/no-unused-modules': [1, { unusedExports: true }],
+                'import/no-unused-modules': [
+                    'error',
+                    { unusedExports: true, missingExports: true },
+                ],
             },
         },
     ],

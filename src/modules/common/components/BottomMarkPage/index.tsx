@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { StyleProp, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import BookStoreSplashLogo from 'assets/svg/BookStoreSplashLogo';

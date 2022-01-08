@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Title from 'materials/Title';
-import { getRegistrationEditorial } from 'constants/editorial/registration';
-import { useSelector } from 'react-redux';
-import { selectLanguage } from 'redux/slices/app';
 import TextInput from 'materials/TextInput';
 import { useForm, Controller } from 'react-hook-form';
 import { useTheme } from 'react-native-paper';
@@ -11,34 +8,36 @@ import { passwordRules, usernameRules } from 'modules/sign-in/constants/rules';
 import PrimaryButton from 'materials/PrimaryButton';
 import TextButton from 'materials/TextButton';
 import { useNavigation } from '@react-navigation/native';
-import { AppRoutes } from 'navigator/appRoutes';
-import AuthDrawer from 'modules/common/components/AuthDrawer';
-import { AuthRoutes } from '../../navigator/authNavigator/authRoutes';
+import { AuthRoutes } from 'navigator/authNavigator/authRoutes';
+import useEditorial from 'hooks/useEditorial';
+import { SignInFormType, SignInFormDefaultValues } from 'modules/sign-in/constants/form';
 
 const SignIn: FC = () => {
     const theme = useTheme();
-    const { title, forgotText } = makeStyles(theme);
+    const { forgotText } = makeStyles(theme);
 
-    const lang = useSelector(selectLanguage);
+    const navigation = useNavigation<any>();
+
     const {
-        SignIn: SignInText,
-        Username,
-        Password,
-        ForgotPassword,
-        Registration,
-    } = getRegistrationEditorial(lang);
+        SignInEditorial: { SignIn: SignInText, ForgotPassword, Registration },
+        CommonEditorial: { Username, Password, Ok },
+    } = useEditorial();
 
-    const { control } = useForm({ mode: 'onChange' });
-    const { navigate } = useNavigation<any>();
+    const { control } = useForm<SignInFormType>({
+        mode: 'onChange',
+        defaultValues: SignInFormDefaultValues,
+    });
 
-    const handleForgotPassword = () => navigate({ name: AuthRoutes.ForgotPassword });
-    const handleRegistration = () => navigate({ name: AuthRoutes.Registration });
+    const handleForgotPassword = () => navigation.push(AuthRoutes.ForgotPassword);
+    const handleRegistration = () => navigation.push(AuthRoutes.Registration);
 
     const handleSignIn = () => {};
 
     return (
-        <>
-            <Title style={title}>{SignInText}</Title>
+        <View style={{ marginTop: 10 }}>
+            <Title textAlign="center" marginBottom={32}>
+                {SignInText}
+            </Title>
 
             <Controller
                 control={control}
@@ -82,20 +81,18 @@ const SignIn: FC = () => {
             </View>
 
             <View style={{ marginTop: 24 }}>
-                <PrimaryButton onPress={handleSignIn}>Ok</PrimaryButton>
+                <PrimaryButton onPress={handleSignIn}>{Ok}</PrimaryButton>
             </View>
 
             <View style={{ marginTop: 8 }}>
                 <TextButton onPress={handleRegistration}>{Registration}</TextButton>
             </View>
-        </>
+        </View>
     );
 };
 
 const makeStyles = ({ colors, fonts }: ReactNativePaper.Theme) =>
     StyleSheet.create({
-        title: { textAlign: 'center', marginBottom: 32 },
-
         forgotText: {
             textDecorationLine: 'underline',
             color: colors.secondaryText,
